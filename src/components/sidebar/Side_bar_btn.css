@@ -1,0 +1,16 @@
+.btn {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: x-large;
+  padding: 10px;
+  border-radius: 0px 50px 50px 0px;
+  color: azure;
+}
+.btn:hover {
+  background-color: rgb(29, 56, 80);
+}
