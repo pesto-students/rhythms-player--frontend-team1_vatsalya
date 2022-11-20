@@ -13,6 +13,7 @@ import {
   MdOutlineVolumeOff,
   MdOutlineVolumeUp,
 } from "react-icons/md";
+import Slider from "./Slider";
 function Player({
   SetCurrentSong,
   currentSong,
@@ -32,14 +33,13 @@ function Player({
   const clickRef = useRef();
   const checkWidth = (e) => {
     let width = clickRef.current.clientWidth;
-    let offset = e.nativeElement.offsetX;
-
-    console.log(width, offset);
+    // let offset = e.nativeElement.offsetX;
+    console.log(width);
   };
   // play previous song
   const playPreviousSong = () => {
-    const index = songs.findIndex((x) => x.title == currentSong.title);
-    if (index == 0) {
+    const index = songs.findIndex((x) => x.title === currentSong.title);
+    if (index === 0) {
       SetCurrentSong(songs[songs.length - 1]);
     } else {
       SetCurrentSong(songs[index - 1]);
@@ -48,8 +48,8 @@ function Player({
   };
   // play next song
   const playNextSong = () => {
-    const index = songs.findIndex((x) => x.title == currentSong.title);
-    if (index == songs.length) {
+    const index = songs.findIndex((x) => x.title === currentSong.title);
+    if (index === songs.length) {
       SetCurrentSong(songs[0]);
     } else {
       SetCurrentSong(songs[index + 1]);
@@ -64,7 +64,14 @@ function Player({
   const unmuteAudio = () => {
     setIsMuted(false);
   };
-
+  // skip backward 5 sec
+  const skipBackward = () => {
+    audioElem.current.currentTime -= 5;
+  };
+  // skip forward 5 sec
+  const skipForward = () => {
+    console.log((audioElem.current.currentTime += 1));
+  };
   return (
     <div className="w-full h-40 relative z-10 bottom-[230px] bg-[#625e5e41]    ">
       <div className="flex">
@@ -75,27 +82,21 @@ function Player({
           />
         </div>
         <div className=" w-full h-40 ">
-          <div
-            className="w-full h-2 bg-white rounded-md mx-4"
-            onClick={checkWidth}
-            ref={clickRef}
-          >
-            <div
-              className="h-full rounded-md bg-red-400"
-              style={{ width: `${parseInt(currentSong.progress)}%` }}
-            ></div>
-          </div>
-          <div className="flex w-full h-[120px]">
-            <div className=" flex">
-              <div className="flex-col justify-evenly h-full w-36  flex-nowrap ml-2 text-lg font-medium text-white capitalize ">
+          <Slider audioElem={audioElem} currentSong={currentSong} />
+          <div className="flex w-full h-[130px] m-2">
+            <div className=" flex ">
+              <div className="flex-col items-center   justify-center  h-full w-36  flex-nowrap ml-2 text-lg font-medium text-white capitalize  ">
                 <div className="">{currentSong.title}</div>
                 <div className="">{currentSong.Artist_name}</div>
               </div>
             </div>
-            <div className="flex items-center justify-center h-full w-full place-content-around text-7xl">
-              <AiFillBackward className="hover:text-white" />
-              <AiFillFastBackward
+            <div className="flex items-center justify-center h-full w-full  text-6xl ">
+              <AiFillBackward
                 className="hover:text-white"
+                onClick={skipBackward}
+              />
+              <AiFillFastBackward
+                className="hover:text-white "
                 onClick={playPreviousSong}
               />
 
@@ -103,30 +104,34 @@ function Player({
               {isPlaying ? (
                 <AiFillPauseCircle
                   onClick={PlayPause}
-                  className="hover:text-white"
+                  className="hover:text-white text-7xl"
                 />
               ) : (
                 <AiFillPlayCircle
                   onClick={PlayPause}
-                  className="hover:text-white"
+                  className="hover:text-white text-7xl"
                 />
               )}
-
               <AiFillFastForward
-                className="hover:text-white"
+                className="active:ring-10 ring-primary/30   hover:text-white "
                 onClick={playNextSong}
               />
               <AiFillForward className="hover:text-white" />
-              <MdShuffle className="hover:text-white" />
-              <MdPlaylistAdd className="hover:text-white" />
-              <MdOutlineVolumeOff
-                className="hover:text-white"
-                onClick={muteAudio}
-              />
-              <MdOutlineVolumeUp
-                className="hover:text-white"
-                onClick={unmuteAudio}
-              />
+              <div
+                className="flex text-5xl justify-between "
+                onClick={skipForward}
+              >
+                <MdShuffle className="hover:text-white" />
+                <MdPlaylistAdd className="hover:text-white" />
+                <MdOutlineVolumeOff
+                  className="hover:text-white"
+                  onClick={muteAudio}
+                />
+                <MdOutlineVolumeUp
+                  className="hover:text-white"
+                  onClick={unmuteAudio}
+                />
+              </div>
             </div>
           </div>
         </div>
