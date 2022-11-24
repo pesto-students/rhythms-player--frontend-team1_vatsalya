@@ -9,6 +9,25 @@
   .slider::-webkit-slider-thumb {
     @apply appearance-none;
   }
+  /* .dropDownLanguage {
+    position: absolute;
+    top: 4.5rem;
+    right: 4rem;
+    width: 220px;
+    padding: 15px;
+    border-radius: 15px;
+    border-color: white;
+    border: 1px solid gray;
+    background-color: aliceblue;
+  } */
+  /* .dropDownLanguage::before {
+    position: absolute;
+    top: -2rem;
+    right: 2rem;
+    width: 25px;
+    height: 25px;
+    background-color: aliceblue;
+  } */
 }
 
 * {

@@ -38,7 +38,7 @@ function Player({
   };
   // play previous song
   const playPreviousSong = () => {
-    const index = songs.findIndex((x) => x.title === currentSong.title);
+    const index = songs.findIndex((x) => x.song_id === currentSong.song_id);
     if (index === 0) {
       SetCurrentSong(songs[songs.length - 1]);
     } else {
@@ -48,7 +48,7 @@ function Player({
   };
   // play next song
   const playNextSong = () => {
-    const index = songs.findIndex((x) => x.title === currentSong.title);
+    const index = songs.findIndex((x) => x.song_id === currentSong.song_id);
     if (index === songs.length) {
       SetCurrentSong(songs[0]);
     } else {
@@ -70,10 +70,10 @@ function Player({
   };
   // skip forward 5 sec
   const skipForward = () => {
-    console.log((audioElem.current.currentTime += 1));
+    audioElem.current.currentTime += 1;
   };
   return (
-    <div className="w-full h-40 relative z-10 bottom-[230px] bg-[#625e5e41]    ">
+    <div className="w-full h-40 relative z-10 bottom-[230px] bg-[#09090941]    ">
       <div className="flex">
         <div className="w-48 h-40  ">
           <img
