@@ -4,6 +4,12 @@ import Main_area from "../Main/Main_area.component";
 import Player from "../Player/Player.component";
 import Sidebar from "../sidebar/Sidebar.component";
 import { songsdata } from "../audio/Audio";
+import { Routes, route, Route, Router } from "react-router-dom";
+import ArtistPage from "../artists/Artist.page";
+import { artists_list } from "../artists/Artist_list";
+import Playlist_Page from "../Main/Playlist_Page.component";
+import { Albums } from "../album/album";
+
 function Rhythem() {
   const [songs, setSongs] = useState(songsdata);
   const [isPlaying, setIsPlaying] = useState(false); //for play and pause button
@@ -35,12 +41,29 @@ function Rhythem() {
       length: duration,
     });
   };
+  // artist and set artist
+  const [artist, setArtist] = useState(artists_list[0]);
   return (
     <div>
       <Header />
       <div className="flex">
         <Sidebar />
-        <Main_area />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Main_area
+                songs={songs}
+                setSongs={setSongs}
+                currentSong={currentSong}
+                SetCurrentSong={SetCurrentSong}
+              />
+            }
+          />
+
+          <Route path="/artist" element={<ArtistPage artist={artist} />} />
+          <Route path="/playlist" element={<Playlist_Page Albums={Albums} />} />
+        </Routes>
       </div>
       <audio src={currentSong.url} ref={audioElem} onTimeUpdate={onPlaying} />
       <Player
