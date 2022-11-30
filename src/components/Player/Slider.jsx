@@ -7,7 +7,10 @@ function Slider({ currentSong, audioElem }) {
   return (
     <div className="flex items-center gap-5 mt-2">
       <div className="text-sm opacity-80">
-        {(audioElem?.current.currentTime / 360).toFixed(2).replace(".", ":")}
+        {audioElem.current
+          ? (audioElem.current.currentTime / 360).toFixed(2).replace(".", ":")
+          : "0:00"}
+        {/* {(audioElem.current.currentTime / 360).toFixed(2).replace(".", ":")} */}
       </div>
       <div className="relative  w-full h-2 rounded bg-white" onClick={moveSong}>
         <div
@@ -18,7 +21,9 @@ function Slider({ currentSong, audioElem }) {
         <input type="range" className="slider"></input>
       </div>
       <div className="text-sm opacity-80 ">
-        {(currentSong.length / 360).toFixed(2).replace(".", ":")}
+        {currentSong.length
+          ? (currentSong.length / 360).toFixed(2).replace(".", ":")
+          : "0:00"}
       </div>
     </div>
   );
