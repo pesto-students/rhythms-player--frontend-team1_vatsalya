@@ -3,21 +3,22 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  BrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
+// import { StateProvider } from "./StateProvider";
+import reducer, { initialState } from "./reducer";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
+  <Auth0Provider
+    domain="dev-hdlor5j43zfcap7orhythemplayer.us.auth0.com"
+    clientId="EUEbQ1lpAWXyOVCJxYlhaeUQwkhYhQlZ"
+    redirectUri={window.location.origin}
+  >
+    <Router>
       <App />
-    </BrowserRouter>
-  </React.StrictMode>
+    </Router>
+  </Auth0Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

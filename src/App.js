@@ -1,11 +1,11 @@
 import "./App.css";
-import Rhythem from "./components/Rhythem/Rhythem.App.componenet";
 
+import Spotify from "./components/audio/Spotify";
 function App() {
   return (
     <div className="App">
-      <Rhythem />
-      
+      {/* if log in  check then render  */}
+      <Spotify />
     </div>
   );
 }

@@ -9,6 +9,7 @@ import ArtistPage from "../artists/Artist.page";
 import { artists_list } from "../artists/Artist_list";
 import Playlist_Page from "../Main/Playlist_Page.component";
 import { Albums } from "../album/album";
+import Search from "../Main/Search.page";
 
 function Rhythem() {
   const [songs, setSongs] = useState(songsdata);
@@ -63,6 +64,7 @@ function Rhythem() {
 
           <Route path="/artist" element={<ArtistPage artist={artist} />} />
           <Route path="/playlist" element={<Playlist_Page Albums={Albums} />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </div>
       <audio src={currentSong.url} ref={audioElem} onTimeUpdate={onPlaying} />

@@ -28,6 +28,34 @@
     height: 25px;
     background-color: aliceblue;
   } */
+  .playlist-body {
+    width: 94%;
+    height: 90%;
+    padding: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    justify-content: space-between;
+  }
+  .playlist-card {
+    width: 30%;
+    height: 30%;
+    border-radius: 20px;
+    background-color: rgb(30, 42, 62);
+    border: 1px solid rgba(54, 69, 98, 0.18);
+
+    margin: 20px;
+    background: linear-gradient(
+      75deg,
+      rgb(40, 58, 88) 0%,
+      rgba(54, 69, 98, 0) 100%
+    );
+  }
+  .playlist-image {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 10px;
+  }
 }
 
 * {
