@@ -1,11 +1,10 @@
 import "./App.css";
-import Rhythem from "./components/Rhythem/Rhythem.App.componenet";
+import RouteConfig from "./routes/RouteConfig";
 
 function App() {
   return (
     <div className="App">
-      <Rhythem />
-      
+      <RouteConfig />
     </div>
   );
 }
