@@ -70,7 +70,7 @@
     @apply border-solid border cursor-pointer relative;
     width: 220px;
     height: 240px;
-
+    position: relative;
     border-radius: 20px;
     border-color: rgba(54, 69, 98, 0.18);
     padding-top: 1%;
@@ -81,6 +81,7 @@
     background-color: rgba(30, 42, 62, 1);
     transition: all 0.2s ease;
     margin-left: 10px;
+    cursor: pointer;
   }
   .card-title {
     @apply font-extrabold text-base mx-0 my-2 overflow-hidden;
@@ -88,6 +89,12 @@
     display: -webkit-box;
     text-overflow: ellipsis;
     line-clamp: 2;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
   .card-subTitle {
     @apply font-normal text-xs m-0;
@@ -118,11 +125,109 @@
   .card-image {
     width: 100%;
     height: 80%;
-    /* aspect-ratio: 1; */
+    aspect-ratio: 1;
     border-radius: 15px;
   }
   .card:hover {
     transform: scale(1.02);
+  }
+  .avatar {
+    line-height: 0; /* remove line-height */
+    display: inline-block; /* circle wraps image */
+    margin: 5px;
+    border: 4px solid rgba(200, 200, 200, 0.4);
+    border-radius: 50%; /* relative value */
+    /*box-shadow: 0px 0px 5px rgba(0,0,0,0.4);*/
+    transition: linear 0.25s;
+    height: fit-content;
+    width: fit-content;
+    cursor: pointer;
+  }
+  .avatar img {
+    height: 128px;
+    width: 128px;
+    border-radius: 50%; /* relative value for
+    adjustable image size */
+  }
+  .avatar :hover {
+    transition: ease-out 0.2s;
+    border: 4px solid rgba(0, 0, 0, 0.2);
+    -webkit-transition: ease-out 0.2s;
+  }
+  .avatar-name {
+    text-align: center;
+    color: white;
+    font-size: medium;
+    /* background-color: #000000; */
+    opacity: 100;
+    position: relative;
+    z-index: 2;
+    top: -20px;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+  /* player page styles*/
+  .left-player-body {
+    @apply h-full;
+    width: 68%;
+    margin-right: 2%;
+  }
+  .right-player-body {
+    @apply flex flex-col justify-between h-full;
+    width: 30%;
+  }
+  /* song card */
+  .songCard-body {
+    @apply flex-col items-center justify-center w-full;
+    height: 62%;
+    background-color: rgba(39, 53, 77, 1);
+    border-radius: 30px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+
+  .albumImage {
+    @apply items-center justify-center relative;
+    width: 80%;
+    z-index: 1;
+  }
+  .albumImage img {
+    @apply w-full;
+    border-radius: 30px;
+  }
+  .albumImage-shadow {
+    @apply absolute;
+    filter: blur(10px);
+    width: 90%;
+    z-index: -1;
+    top: 31px;
+  }
+  /*track info section*/
+  .albumInfo-card {
+    @apply mt-5;
+    width: 80%;
+  }
+
+  .albumName-container {
+    @apply font-bold text-xl overflow-hidden w-full;
+    color: rgba(195, 208, 227, 1);
+  }
+
+  .album-info {
+    @apply font-medium text-sm overflow-hidden;
+    color: rgba(154, 169, 194, 1);
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-clamp: 2;
+  }
+
+  .album-release {
+    @apply font-normal text-xs mt-2;
+    color: rgba(154, 169, 194, 1);
   }
 }
 body {
@@ -146,5 +251,5 @@ code {
 }
 
 *::-webkit-scrollbar {
-  /* display: none; */
+  display: none;
 }
