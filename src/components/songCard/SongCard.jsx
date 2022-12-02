@@ -5,7 +5,7 @@ function SongCard({ album }) {
   return (
     <div className="songCard-body flex">
       <AlbumImage url={album?.images[0]?.url} />
-      <AlbumInfo album={album} />
+      {/* <AlbumInfo album={album} /> */}
     </div>
   );
 }

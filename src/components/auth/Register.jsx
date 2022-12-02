@@ -1,6 +1,13 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "../../assets/css/auth.css";
+import swal from "sweetalert";
+import { API } from "../../config/APIConfig";
+import { useNavigate } from "react-router-dom";
+const RegisterAPI = `${API.URL}/api/${API.VERSION}/register`;
+
 const Register = () => {
+  const navigate = useNavigate();
   const [regObj, setRegObj] = useState({});
 
   const handleInpChange = (e) => {
@@ -13,31 +20,35 @@ const Register = () => {
   };
 
   const handleSubmit = (e) => {
+    debugger;
     e.preventDefault();
-    const { fname, lname, email, password } = regObj;
-    console.log(fname, lname, email, password);
-    fetch("http://localhost:5000/register", {
-      method: "POST",
-      crossDomain: true,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        fname,
-        email,
-        lname,
-        password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data, "userRegister");
+    const headers = {
+      "Content-Type": "application/json;charset=utf-8",
+      "Access-Control-Allow-Origin": "*",
+    };
+    axios
+      .post(RegisterAPI, regObj, {
+        headers: headers,
+      })
+      .then((response) => {
+        console.log(response, "userRegister");
+        if (response?.status === 200) {
+          swal("Thank you for registering!", "", "success", {
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+          }).then((okay) => {
+            if (okay) {
+              navigate("/login", { replace: true });
+            }
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+        swal("Registration Failed", "Please Try Again", "error", { closeOnClickOutside: false, closeOnEsc: false });
       });
   };
   return (
-       
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <a
@@ -62,7 +73,7 @@ const Register = () => {
                   htmlFor="fname"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                 First Name
+                  First Name
                 </label>
                 <input
                   type="text"
@@ -79,7 +90,7 @@ const Register = () => {
                   htmlFor="fname"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                 Last Name
+                  Last Name
                 </label>
                 <input
                   type="text"
@@ -133,7 +144,7 @@ const Register = () => {
                   Confirm password
                 </label>
                 <input
-                  type="confirm-password"
+                  type="password"
                   name="confirm-password"
                   id="confirm-password"
                   placeholder="••••••••"
@@ -150,7 +161,6 @@ const Register = () => {
                     type="checkbox"
                     className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                     required=""
-                    
                   />
                 </div>
                 <div className="ml-3 text-sm">
