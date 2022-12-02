@@ -33,8 +33,7 @@ const Login = () => {
       .then((response) => {
         console.log(response, "userLogin");
         if (response?.status === 200) {
-          if (response?.data?.length != 0)
-            navigate("/player", { replace: true });
+          if (response?.data?.length != 0) navigate("/home", { replace: true });
           else {
             swal("Login Failed", "Please Try Again", "error", {
               closeOnClickOutside: false,
