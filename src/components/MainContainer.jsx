@@ -3,16 +3,22 @@ import { TokenContext } from "../context/spotify.token";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BsFillPlayCircleFill } from "react-icons/bs";
-
+import { CurrentSongContext } from "../context/currentSong.context";
+//main container responsible for fetching
+// 1) List of latest songs
+// 2) A list of artists
+// 3) Navigating to the respective artist page if clicked on it !NOT WORKING YET
+// 4) Navigating to the Players Page if clicked on the Track !WORKING BUT NOT NEEDED
 function MainContainer() {
   const [tracks, setTracks] = useState(null); // list of tracks
   const { Token } = useContext(TokenContext); // token that was generated as the  app start
+  const { currentSong, setCurrentSong } = useContext(CurrentSongContext);
   const Navigate = useNavigate();
   // Wildcards for random search
   let random_wildcards = [
     "%a%",
     "b%",
-    "%c",
+    "%ca",
     "%e%",
     "e%",
     "%d",
@@ -27,8 +33,10 @@ function MainContainer() {
     "%u",
   ];
   useEffect(() => {
+    // 1) List of latest songs
     let wildcard =
-      random_wildcards[Math.floor(Math.random() * random_wildcards.length)]; // selecting a random letter from the random wild cards
+      random_wildcards[Math.floor(Math.random() * random_wildcards.length)];
+    // selecting a random letter from the random wild cards
     const token = Token;
     // get random tracks
     async function fetchData(e) {
@@ -48,6 +56,7 @@ function MainContainer() {
       });
       const res = response.data.tracks.items;
       console.log(res);
+      setCurrentSong(res);
       setTracks(response.data?.tracks?.items);
     }
 
@@ -56,6 +65,7 @@ function MainContainer() {
   const [artistList, setArtistList] = useState(null);
   // getting random artist list
   useEffect(() => {
+    // 2) A list of artists
     let random_artist =
       random_wildcards[Math.floor(Math.random() * random_wildcards.length)];
     // calling spotify search with random  random search param
@@ -81,11 +91,12 @@ function MainContainer() {
     }
     fetchData();
   }, [Token]);
-  // play selected track
+  // 4) Navigating to the Players Page if clicked on the Track !WORKING BUT NOT NEEDED
   const playTrack = (id) => {
+    setCurrentSong(id); // setting current song by sending the id of the track
     Navigate("/Player", { state: { id: id } });
   };
-  // navigate to selected user page
+  // 3) Navigating to the respective artist page if clicked on it !NOT WORKING YET
   const artistPage = (id) => {
     Navigate("/artist_page", { state: { id: id } });
   };

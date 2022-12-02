@@ -10,7 +10,7 @@ function Spotify() {
 
   useEffect(() => {
     const localToken = window.localStorage.getItem("token");
-    console.log("local token" + localToken);
+    // console.log("local token" + localToken);
     if (!localToken) {
       //Api to retrieving token
       axios("https://accounts.spotify.com/api/token", {
@@ -22,7 +22,7 @@ function Spotify() {
         data: "grant_type=client_credentials",
       })
         .then((tokenresponse) => {
-          console.log(tokenresponse.data);
+          // console.log(tokenresponse.data);
 
           setToken(tokenresponse.data.access_token);
           window.localStorage.setItem("token", tokenresponse.data.access_token);
