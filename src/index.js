@@ -3,19 +3,25 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  BrowserRouter,
-} from "react-router-dom";
+import { UserProvider } from "./context/user.component";
+import { BrowserRouter } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
+import { TokenProvider } from "./context/spotify.token";
+import { CurrentSongProvider } from "./context/currentSong.context";
+const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+const clientId = process.env.REACT_APP_CLIENT_ID;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <CurrentSongProvider>
+        <TokenProvider>
+          <UserProvider>
+            <App />
+          </UserProvider>
+        </TokenProvider>
+      </CurrentSongProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
