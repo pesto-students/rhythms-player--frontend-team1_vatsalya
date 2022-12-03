@@ -1,6 +1,6 @@
 import React from "react";
 import AlbumImage from "./AlbumImage";
-import AlbumInfo from "./AlbumInfo";
+// import AlbumInfo from "./AlbumInfo";
 function SongCard({ album }) {
   return (
     <div className="songCard-body flex">

@@ -102,10 +102,10 @@ function MainContainer() {
   };
 
   return (
-    <div className="max-h-screen  w-screen bg-neutral-600/70">
+    <div className="max-h-screen  w-screen ">
       <div
         className="w-screen h-fit     
-          flex items-center pt-5  my-10 bg-gray-600/50 overflow-auto"
+          flex items-center pt-5  my-10 bg-[rgb(64,63,63)] overflow-auto"
       >
         {tracks?.map((track) => {
           return (
@@ -132,7 +132,7 @@ function MainContainer() {
 
       <div
         className="w-screen h-44     
-          flex items-center pt-5 px-2 my-10 bg-gray-600/50 overflow-auto "
+          flex items-center pt-5 px-2 my-10 bg-[rgb(64,63,63)] overflow-auto "
       >
         {artistList?.map((artist) => {
           return (

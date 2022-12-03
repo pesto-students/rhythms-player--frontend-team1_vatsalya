@@ -44,7 +44,7 @@ function Player() {
         <Queue trackData={trackData} setCurrentIndex={setCurrentIndex} />
       </div>
       <div className="left-player-body">
-        {/* <Lyrics trackData={trackData} /> */}
+        <Lyrics trackData={trackData} />
       </div>
     </div>
   );

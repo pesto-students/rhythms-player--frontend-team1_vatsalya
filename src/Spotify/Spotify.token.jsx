@@ -24,8 +24,11 @@ function Spotify() {
         .then((tokenresponse) => {
           // console.log(tokenresponse.data);
 
-          setToken(tokenresponse.data.access_token);
-          window.localStorage.setItem("token", tokenresponse.data.access_token);
+          setToken(tokenresponse?.data?.access_token);
+          window.localStorage.setItem(
+            "token",
+            tokenresponse?.data?.access_token
+          );
         })
         .catch((error) => console.log(error));
     } else {

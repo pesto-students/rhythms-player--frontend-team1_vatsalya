@@ -95,9 +95,9 @@ function AudioPlayer() {
     setIsPlaying(!isPlaying);
   };
   return (
-    <div className=" w-screen h-40 absolute bottom-10 flex">
+    <div className=" w-screen h-40 absolute bottom-1 flex">
       <div className="h-full w-60 bg-black"></div>
-      <div className="w-screen h-full  ">
+      <div className="w-screen h-full bg-[rgba(42,40,51,0.6)] ">
         <div className="w-full h-10">
           <ProgressBar percentage={trackProgress} audioRef={audioRef.current} />
         </div>

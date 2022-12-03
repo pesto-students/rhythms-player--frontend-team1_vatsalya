@@ -45,7 +45,7 @@ function Header({ searchResult }) {
     }
   }, [debouncedSearch]);
   return (
-    <div className="flex p-2 w-screen h-24 bg-black justify-between">
+    <div className="flex p-2 w-screen h-24 bg-[rgb(43,42,42)] justify-between">
       <div className="flex items-center ">
         <div className=" w-10 h-10 bg-white rounded-full flex justify-center content-center">
           <svg

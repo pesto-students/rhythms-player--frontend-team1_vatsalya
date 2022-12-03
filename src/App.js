@@ -14,31 +14,10 @@ import "./App.css";
 import RouteConfig from "./routes/RouteConfig";
 
 function App() {
-  // const [Data, setData] = useState("");
-  // function searchResult(result) {
-  //   setData(result);
-  // }
-
   return (
-    // <div className="App">
-    //   <Header searchResult={searchResult} />
-    //   <div className="flex">
-    //     <SideBar />
-    //     <Routes>
-    //       <Route index path="/" element={<MainContainer />} />
-    //       <Route exact path="/Favorite" element={<Favorite />} />
-    //       <Route exact path="/History" element={<History />} />
-    //       <Route exact path="/Repeated" element={<Repeated />} />
-    //       <Route exact path="/Playlist" element={<Playlist />} />
-    //       <Route path="/Search" element={<Search searchData={Data} />} />
-    //       <Route exact path="/Player" element={<Player />} />
-    //     </Routes>
-    //   </div>
-    //   <AudioPlayer />
-
-    //   <div className="background"></div>
-    // </div>
-    <RouteConfig/>
+    <div className="App">
+      <RouteConfig />
+    </div>
   );
 }
 

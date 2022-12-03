@@ -45,11 +45,14 @@ const Register = () => {
       })
       .catch((error) => {
         console.error("There was an error!", error);
-        swal("Registration Failed", "Please Try Again", "error", { closeOnClickOutside: false, closeOnEsc: false });
+        swal("Registration Failed", "Please Try Again", "error", {
+          closeOnClickOutside: false,
+          closeOnEsc: false,
+        });
       });
   };
   return (
-    <section className="bg-gray-50 dark:bg-gray-900">
+    <section className="bg-gray-50 dark:bg-gray-900 w-screen z-10   absolute top-0 left-0">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <a
           href="#"

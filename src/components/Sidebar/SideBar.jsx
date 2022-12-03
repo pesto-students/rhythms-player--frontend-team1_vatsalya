@@ -7,7 +7,7 @@ function SideBar() {
   function _navigate(id) {
     switch (id) {
       case 1:
-        Navigate("/");
+        Navigate("/Home");
         break;
       case 2:
         Navigate("/Favorite");
