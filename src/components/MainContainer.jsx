@@ -31,9 +31,13 @@ function MainContainer() {
     "%u%",
     "u%",
     "%u",
+    "%j%",
+    "%k",
+    "k%",
+    "%w%",
   ];
   useEffect(() => {
-    // 1) List of latest songs
+    // 1) List of  songs
     let wildcard =
       random_wildcards[Math.floor(Math.random() * random_wildcards.length)];
     // selecting a random letter from the random wild cards
@@ -54,9 +58,9 @@ function MainContainer() {
           Authorization: "Bearer " + token,
         },
       });
-      const res = response.data.tracks.items;
+      const res = response.data?.tracks?.items;
       console.log(res);
-      setCurrentSong(res);
+      setCurrentSong(res); // setting current song context for the very first time
       setTracks(response.data?.tracks?.items);
     }
 
@@ -91,10 +95,41 @@ function MainContainer() {
     }
     fetchData();
   }, [Token]);
+  // Albums list
+  const [albumList, setAlbumList] = useState(null);
+  useEffect(() => {
+    // 2) A list of artists
+    let random_album =
+      random_wildcards[Math.floor(Math.random() * random_wildcards.length)];
+    // calling spotify search with random  random search param
+    async function fetchData(e) {
+      let token = Token;
+      const response = await axios.get("https://api.spotify.com/v1/search", {
+        params: {
+          q: random_album,
+          type: "album",
+          market: "IN",
+          limit: "20",
+          offset: "0",
+        },
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
+      const res = response.data;
+      // console.log(res);
+      setAlbumList(response.data?.albums?.items);
+    }
+    fetchData();
+  }, [Token]);
   // 4) Navigating to the Players Page if clicked on the Track !WORKING BUT NOT NEEDED
-  const playTrack = (id) => {
-    setCurrentSong(id); // setting current song by sending the id of the track
-    Navigate("/Player", { state: { id: id } });
+  const playTrack = (track) => {
+    // console.log(id);
+    setCurrentSong([...currentSong, track]);
+    console.log(currentSong); // setting current song by sending the id of the track
+    // Navigate("/Player", { state: { id: id } });
   };
   // 3) Navigating to the respective artist page if clicked on it !NOT WORKING YET
   const artistPage = (id) => {
@@ -102,7 +137,7 @@ function MainContainer() {
   };
 
   return (
-    <div className="max-h-screen  w-screen ">
+    <div className="max-h-screen  w-screen overflow-y-scroll">
       <div
         className="w-screen h-fit     
           flex items-center pt-5  my-10 bg-[rgb(64,63,63)] overflow-auto"
@@ -112,7 +147,7 @@ function MainContainer() {
             <div
               className="card"
               key={track.id}
-              onClick={() => playTrack(track.id)}
+              onClick={() => playTrack(track)}
             >
               <img
                 className="card-image"
@@ -145,6 +180,29 @@ function MainContainer() {
                 <img src={artist.images[0].url}></img>
               </div>
               <p className="avatar-name ">{artist.name}</p>
+            </div>
+          );
+        })}
+      </div>
+      <div
+        className="w-screen h-fit     
+          flex items-center pt-5  my-10 bg-[rgb(64,63,63)] overflow-auto"
+      >
+        {albumList?.map((album) => {
+          return (
+            <div
+              className="card"
+              key={album.id}
+              onClick={() => playTrack(album.id)}
+            >
+              <img className="card-image" src={album?.images[0].url}></img>
+              <p className="card-title  truncate">{album.name}</p>
+              <p className=" card-subTitle">
+                {album?.artists[0]?.external_urls?.name}
+              </p>
+              <div className="card-fade">
+                <BsFillPlayCircleFill className=" text-green-500 w-[50px] h-[50px]" />
+              </div>
             </div>
           );
         })}

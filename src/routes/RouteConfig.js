@@ -20,6 +20,7 @@ import { useState } from "react";
 import Player from "../components/Pages/Player";
 import AudioPlayer from "../components/AudioPlayer.component";
 // import AudioPlayer from "./components/AudioPlayer.component";
+import GetToken from "../Spotify/Spotify.token";
 
 const RouteConfig = () => {
   const [Data, setData] = useState("");
@@ -28,6 +29,7 @@ const RouteConfig = () => {
   }
   return (
     <BrowserRouter>
+      <GetToken />
       <Header searchResult={searchResult} />
 
       <div className="flex">

@@ -16,9 +16,9 @@ function Player() {
 
   useEffect(() => {
     const token = Token;
-    console.log(location.state);
+    console.log(location.state.data);
     if (location.state) {
-      const track_id = location.state.id;
+      const track_id = location.state.data.id;
       async function getTrackData() {
         const response = await axios.get("https://api.spotify.com/v1/tracks", {
           params: {
@@ -40,11 +40,11 @@ function Player() {
   return (
     <div className="flex w-screen h-screen">
       <div className="right-player-body">
-        <SongCard album={currentTrack.album} />
+        <SongCard album={location.state.data} />
         <Queue trackData={trackData} setCurrentIndex={setCurrentIndex} />
       </div>
       <div className="left-player-body">
-        <Lyrics trackData={trackData} />
+        {/* <Lyrics trackData={location.state.data} /> */}
       </div>
     </div>
   );

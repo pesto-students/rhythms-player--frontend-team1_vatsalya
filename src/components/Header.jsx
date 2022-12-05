@@ -1,7 +1,5 @@
-import React, { useState, useContext } from "react";
-import GetToken from "../Spotify/Spotify.token";
+import React, { useState, useContext, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useDebounce from "../hooks/useDebounce";
@@ -9,22 +7,18 @@ import { TokenContext } from "../context/spotify.token";
 
 function Header({ searchResult }) {
   const { Token } = useContext(TokenContext);
-  const type = "track";
-  const [searchInput, setSearchInput] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [Data, setData] = useState();
+  const type = ["album", "artist", "playlist", "track"];
+  const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
-  const debouncedSearch = useDebounce(searchInput, 5000);
+  const debouncedSearch = useDebounce(searchInput, 2000);
   useEffect(() => {
     async function fetchData(e) {
-      setLoading(true);
-
       const token = Token;
 
       const response = await axios.get("https://api.spotify.com/v1/search", {
         params: {
           q: debouncedSearch,
-          type: type,
+          type: "track,artist",
           market: "IN",
           limit: "10",
           offset: "0",
@@ -35,10 +29,11 @@ function Header({ searchResult }) {
           Authorization: "Bearer " + token,
         },
       });
-      // console.log(response.data.items);
+      console.log(response.data);
 
-      searchResult(JSON.stringify(response.data));
-      navigate("search");
+      searchResult(JSON.stringify(response?.data));
+      setSearchInput(" ");
+      navigate("/search");
     }
     if (debouncedSearch) {
       fetchData();
@@ -85,7 +80,7 @@ function Header({ searchResult }) {
           <BsSearch />
         </i>
       </div>
-      <GetToken />
+
       {/* <language/> */}
       {/* <User/> */}
     </div>

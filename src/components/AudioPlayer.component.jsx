@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { CurrentSongContext } from ".././context/currentSong.context";
 import { TokenContext } from ".././context/spotify.token";
+import { UserContext } from "../context/user.component";
 import ProgressBar from "./commonComponents/ProgressBar";
+import { useNavigate } from "react-router-dom";
 import {
   AiFillPlayCircle,
   AiFillPauseCircle,
@@ -9,6 +11,8 @@ import {
   AiFillForward,
   AiFillFastBackward,
   AiFillBackward,
+  AiOutlineFullscreen,
+  AiOutlineFullscreenExit,
 } from "react-icons/ai";
 import {
   MdShuffle,
@@ -17,7 +21,8 @@ import {
   MdOutlineVolumeUp,
 } from "react-icons/md";
 function AudioPlayer() {
-  const { Token } = useContext(TokenContext);
+  const { Token } = useContext(TokenContext); // why?
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   // currenSong is a list of objects
   const { currentSong, setCurrentSong } = useContext(CurrentSongContext);
   let total = [...currentSong];
@@ -26,7 +31,7 @@ function AudioPlayer() {
   // controls states
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackProgress, setTrackProgress] = useState(0);
-
+  const Navigate = useNavigate();
   let audioSrc = total[currentIndex]?.preview_url;
   const audioRef = useRef(new Audio(total[currentIndex]?.preview_url));
   const intervalRef = useRef();
@@ -43,12 +48,12 @@ function AudioPlayer() {
   };
   const handlePrev = () => {
     if (currentIndex - 1 < 0) {
-      setCurrentIndex(total - 1);
+      setCurrentIndex(total.length - 1);
     } else {
-      currentIndex(currentIndex - 1);
+      setCurrentIndex(currentIndex - 1);
     }
   };
-
+  // start a timer to check if the song has ended
   const startTimer = () => {
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
@@ -59,16 +64,29 @@ function AudioPlayer() {
       }
     }, [1000]);
   };
+  // handle play
   useEffect(() => {
-    if (isPlaying && audioRef.current) {
-      audioRef.current = new Audio(audioSrc);
-      audioRef.current.play();
-      startTimer();
+    if (audioRef.current.src) {
+      if (isPlaying) {
+        // audioRef.current = new Audio(audioSrc);
+        audioRef.current.play();
+        startTimer();
+      } else {
+        clearInterval(intervalRef.current);
+        audioRef.current.pause();
+      }
     } else {
-      clearInterval(intervalRef.current);
-      audioRef.current.pause();
+      if (isPlaying) {
+        audioRef.current = new Audio(audioSrc);
+        audioRef.current.play();
+        startTimer();
+      } else {
+        clearInterval(intervalRef.current);
+        audioRef.current.pause();
+      }
     }
   }, [isPlaying]);
+  // handel ending of song and playing next song
   useEffect(() => {
     audioRef.current.pause();
     audioRef.current = new Audio(audioSrc);
@@ -88,22 +106,33 @@ function AudioPlayer() {
       clearInterval(intervalRef.current);
     };
   }, []);
+  const [fullScreen, setFullscreen] = useState(false);
 
-  const PlayPause = () => {
-    // sets isPlaying to false if true or vice versa
+  const Expand_handler = (currentSongDetails) => {
+    console.log(currentSongDetails);
+    // setFullscreen(!fullScreen);
+    // navigate to player page
 
-    setIsPlaying(!isPlaying);
+    Navigate("/Player", { state: { data: currentSongDetails } });
+
+    // setFullscreen(!fullScreen);
   };
+
   return (
     <div className=" w-screen h-40 absolute bottom-1 flex">
-      <div className="h-full w-60 bg-black"></div>
+      <div className="h-full w-60 ">
+        <img
+          className="card-image h-full"
+          src={total[currentIndex]?.album?.images?.[0].url}
+        ></img>
+      </div>
       <div className="w-screen h-full bg-[rgba(42,40,51,0.6)] ">
         <div className="w-full h-10">
           <ProgressBar percentage={trackProgress} audioRef={audioRef.current} />
         </div>
         <div className="h-full w-full  flex">
-          <div className=" h-32 w-3/4">
-            <div className="flex items-center justify-center h-full w-full  text-6xl ">
+          <div className=" h-40 w-3/4  relative">
+            <div className="flex items-center justify-center h-full w-full  text-6xl absolute bottom-5 ">
               <AiFillBackward
                 className="hover:text-white"
                 // onClick={skipBackward}
@@ -114,17 +143,13 @@ function AudioPlayer() {
               />
 
               {/* play pause button change on click */}
-              {isPlaying ? (
-                <AiFillPauseCircle
-                  onClick={PlayPause}
-                  className="hover:text-white text-7xl"
-                />
-              ) : (
-                <AiFillPlayCircle
-                  onClick={PlayPause}
-                  className="hover:text-white text-7xl"
-                />
-              )}
+              <div onClick={() => setIsPlaying(!isPlaying)}>
+                {isPlaying ? (
+                  <AiFillPauseCircle className="hover:text-white text-7xl" />
+                ) : (
+                  <AiFillPlayCircle className="hover:text-white text-7xl" />
+                )}
+              </div>
               <AiFillFastForward
                 className="active:ring-10 ring-primary/30   hover:text-white "
                 onClick={handleNext}
@@ -147,6 +172,17 @@ function AudioPlayer() {
               className="hover:text-white"
               //   onClick={unmuteAudio}
             />
+            <div
+              onClick={() => {
+                Expand_handler(currentSong[currentIndex]);
+              }}
+            >
+              {fullScreen ? (
+                <AiOutlineFullscreenExit className="hover:text-white" />
+              ) : (
+                <AiOutlineFullscreen className="hover:text-white" />
+              )}
+            </div>
           </div>
         </div>
       </div>

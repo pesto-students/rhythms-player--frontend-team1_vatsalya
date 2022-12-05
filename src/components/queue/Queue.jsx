@@ -5,10 +5,10 @@ import { TokenContext } from "../../context/spotify.token";
 import axios from "axios";
 import { useState } from "react";
 function Queue({ trackData, setCurrentIndex }) {
-  console.log(trackData.tacks);
-  console.log(trackData[0]?.artists?.[0]?.id);
+  console.log(trackData);
+  // console.log(trackData?.[0].album?.artists?.[0].id);
   const { Token } = useContext(TokenContext);
-  const Artist_id = trackData[0]?.artists?.[0]?.id;
+  const Artist_id = "6LEG9Ld1aLImEFEVHdWNSB";
   const [Queue, setQueue] = useState([]);
   useEffect(() => {
     const token = Token;
@@ -27,8 +27,10 @@ function Queue({ trackData, setCurrentIndex }) {
           },
         }
       );
-      console.log(response.data);
+      console.log(response.data.tracks);
+
       setQueue(response.data.tracks);
+      console.log(Queue);
     }
 
     getTopTracks();
@@ -41,8 +43,8 @@ function Queue({ trackData, setCurrentIndex }) {
         </p>
         <div className="queue-list">
           {Queue?.map((track) => {
-            <div className="queue-item flex">
-              <p className="track-name">{track?.name}</p>
+            <div className="">
+              <p className="">{track?.name}</p>
               <p>0:30</p>
             </div>;
           })}

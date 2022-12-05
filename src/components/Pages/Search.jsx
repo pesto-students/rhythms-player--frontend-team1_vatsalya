@@ -1,19 +1,44 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { BsFillPlayCircleFill } from "react-icons/bs";
+import { CurrentSongContext } from "../../context/currentSong.context";
 
-function Search(prop) {
-  const [result, setResult] = useState("");
+function Search({ searchData }) {
+  const { currentSong, setCurrentSong } = useContext(CurrentSongContext);
+  const [result, setResult] = useState([]);
   useEffect(() => {
-    const data = prop.searchData;
+    // console.log(searchData);
+    const data = searchData;
     const parsed = JSON.parse(data);
-    setResult(parsed);
-    console.log(parsed);
-  }, []);
+    setResult(parsed.tracks);
+    // console.log(
+    //   parsed.tracks.items.map((item) => {
+    //     return item.name;
+    //   })
+    // );
+  }, [searchData]);
+  const playTrack = (item, index) => {
+    console.log(item);
+    setCurrentSong([item]);
+    // console.log(result.items[index]);
+  };
   return (
-    <div className=" w-screen h-screen bg-red-700">
-      {result.tracks?.items?.map((item, index) => {
-        <p>{item.name}</p>;
+    <div className=" w-screen h-screen flex flex-wrap ">
+      {result?.items?.map((item, index) => {
+        return (
+          <div className="card mt-2" key={item.id}>
+            <img className="card-image" src={item.album?.images[0].url}></img>
+            <p className="card-title  truncate">{item.name}</p>
+            <p className=" card-subTitle">
+              {item?.artists[0]?.external_urls?.name}
+            </p>
+            <div className="card-fade " onClick={() => playTrack(item, index)}>
+              <BsFillPlayCircleFill className=" text-green-500 w-[50px] h-[50px]" />
+            </div>
+          </div>
+        );
       })}
     </div>
   );
