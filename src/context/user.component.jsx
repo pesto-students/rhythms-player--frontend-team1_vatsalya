@@ -2,7 +2,12 @@ import { createContext, useState } from "react";
 
 // these are the actual value
 export const UserContext = createContext({
-  currentUser: null,
+  currentUser: {
+    userName: "",
+    userFav: [],
+    userHistory: [],
+    userPlaylist: [],
+  },
   setCurrentUser: () => null,
 });
 

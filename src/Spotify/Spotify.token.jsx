@@ -22,7 +22,7 @@ function Spotify() {
         data: "grant_type=client_credentials",
       })
         .then((tokenresponse) => {
-          // console.log(tokenresponse.data);
+          console.log(tokenresponse.data);
 
           setToken(tokenresponse?.data?.access_token);
           window.localStorage.setItem(
@@ -34,6 +34,10 @@ function Spotify() {
     } else {
       setToken(localToken);
     }
+    // return () => {
+    //   setToken(null);
+    //   localStorage.removeItem("token");
+    // };
   }, []);
 
   return <div></div>;

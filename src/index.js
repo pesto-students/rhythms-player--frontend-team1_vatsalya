@@ -7,13 +7,14 @@ import { UserProvider } from "./context/user.component";
 // import { Auth0Provider } from "@auth0/auth0-react";
 import { TokenProvider } from "./context/spotify.token";
 import { CurrentSongProvider } from "./context/currentSong.context";
+import { CurrentIndexProvider } from "./context/songIndex.context";
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-  
+    <CurrentIndexProvider>
       <CurrentSongProvider>
         <TokenProvider>
           <UserProvider>
@@ -21,7 +22,7 @@ root.render(
           </UserProvider>
         </TokenProvider>
       </CurrentSongProvider>
-    
+    </CurrentIndexProvider>
   </React.StrictMode>
 );
 

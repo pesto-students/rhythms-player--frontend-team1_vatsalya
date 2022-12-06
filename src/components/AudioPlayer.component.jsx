@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { CurrentSongContext } from ".././context/currentSong.context";
-import { TokenContext } from ".././context/spotify.token";
-import { UserContext } from "../context/user.component";
+// import { TokenContext } from ".././context/spotify.token";
+// import { UserContext } from "../context/user.component";
+import { CurrentIndex } from "../context/songIndex.context";
 import ProgressBar from "./commonComponents/ProgressBar";
 import { useNavigate } from "react-router-dom";
 import {
@@ -21,14 +22,10 @@ import {
   MdOutlineVolumeUp,
 } from "react-icons/md";
 function AudioPlayer() {
-  const { Token } = useContext(TokenContext); // why?
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentIndex, setCurrentIndex } = useContext(CurrentIndex);
   // currenSong is a list of objects
   const { currentSong, setCurrentSong } = useContext(CurrentSongContext);
   let total = [...currentSong];
-  //   const total = temp.length;
-  const [currentIndex, setCurrentIndex] = useState(0);
-  // controls states
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackProgress, setTrackProgress] = useState(0);
   const Navigate = useNavigate();
@@ -37,8 +34,6 @@ function AudioPlayer() {
   const intervalRef = useRef();
   const isReady = useRef(false);
   const { duration } = audioRef.current;
-  const currentPercentage = duration ? (trackProgress / duration) * 100 : 0;
-
   const handleNext = () => {
     if (currentIndex < total.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -117,9 +112,10 @@ function AudioPlayer() {
 
     // setFullscreen(!fullScreen);
   };
+  const showPlaylist = () => {};
 
   return (
-    <div className=" w-screen h-40 absolute bottom-1 flex">
+    <div className=" w-screen h-40 absolute bottom-0 flex">
       <div className="h-full w-60 ">
         <img
           className="card-image h-full"
@@ -163,7 +159,10 @@ function AudioPlayer() {
           </div>
           <div className=" h-32 w-1/4 flex items-center justify-around text-4xl ">
             <MdShuffle className="hover:text-white" />
-            <MdPlaylistAdd className="hover:text-white" />
+            <MdPlaylistAdd
+              className="hover:text-white"
+              onClick={() => showPlaylist()}
+            />
             <MdOutlineVolumeOff
               className="hover:text-white"
               //   onClick={muteAudio}

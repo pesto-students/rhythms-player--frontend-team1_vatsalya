@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BsFillPlayCircleFill } from "react-icons/bs";
 import { CurrentSongContext } from "../context/currentSong.context";
+import { CurrentIndex } from "../context/songIndex.context";
 //main container responsible for fetching
 // 1) List of latest songs
 // 2) A list of artists
@@ -12,7 +13,9 @@ import { CurrentSongContext } from "../context/currentSong.context";
 function MainContainer() {
   const [tracks, setTracks] = useState(null); // list of tracks
   const { Token } = useContext(TokenContext); // token that was generated as the  app start
+  const { currentIndex, setCurrentIndex } = useContext(CurrentIndex);
   const { currentSong, setCurrentSong } = useContext(CurrentSongContext);
+
   const Navigate = useNavigate();
   // Wildcards for random search
   let random_wildcards = [
@@ -60,7 +63,10 @@ function MainContainer() {
       });
       const res = response.data?.tracks?.items;
       console.log(res);
-      setCurrentSong(res); // setting current song context for the very first time
+      if (currentSong.length == 0) {
+        setCurrentSong(res);
+      }
+      // setting current song context for the very first time
       setTracks(response.data?.tracks?.items);
     }
 
@@ -128,6 +134,7 @@ function MainContainer() {
   const playTrack = (track) => {
     // console.log(id);
     setCurrentSong([...currentSong, track]);
+    setCurrentIndex(currentSong.length);
     console.log(currentSong); // setting current song by sending the id of the track
     // Navigate("/Player", { state: { id: id } });
   };
@@ -137,7 +144,7 @@ function MainContainer() {
   };
 
   return (
-    <div className="max-h-screen  w-screen overflow-y-scroll">
+    <div className=" w-screen h-screen relative overflow-y-scroll">
       <div
         className="w-screen h-fit     
           flex items-center pt-5  my-10 bg-[rgb(64,63,63)] overflow-auto"
@@ -145,7 +152,7 @@ function MainContainer() {
         {tracks?.map((track) => {
           return (
             <div
-              className="card"
+              className=" card"
               key={track.id}
               onClick={() => playTrack(track)}
             >
@@ -154,9 +161,7 @@ function MainContainer() {
                 src={track.album?.images[0].url}
               ></img>
               <p className="card-title  truncate">{track.name}</p>
-              <p className=" card-subTitle">
-                {track?.artists[0]?.external_urls?.name}
-              </p>
+              <p className=" card-subTitle">{track?.artists[0]?.name}</p>
               <div className="card-fade">
                 <BsFillPlayCircleFill className=" text-green-500 w-[50px] h-[50px]" />
               </div>
@@ -197,9 +202,7 @@ function MainContainer() {
             >
               <img className="card-image" src={album?.images[0].url}></img>
               <p className="card-title  truncate">{album.name}</p>
-              <p className=" card-subTitle">
-                {album?.artists[0]?.external_urls?.name}
-              </p>
+              <p className=" card-subTitle">{album?.artists[0]?.name}</p>
               <div className="card-fade">
                 <BsFillPlayCircleFill className=" text-green-500 w-[50px] h-[50px]" />
               </div>

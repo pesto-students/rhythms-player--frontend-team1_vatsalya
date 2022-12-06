@@ -2,37 +2,51 @@ import React, { useEffect, useContext } from "react";
 import { UserContext } from "../../context/user.component";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useState } from "react";
-function AlbumInfo({ album }) {
-  console.log(album);
+import { API } from "../../config/APIConfig";
+import axios from "axios";
+function AlbumInfo({ trackData }) {
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  console.log(trackData);
+
+  // console.log(favArr);
   const artists = new Array();
+  // collecting artist names
   useEffect(() => {
-    album?.album?.artists?.forEach((Element) => {
+    trackData?.album?.artists?.forEach((Element) => {
       artists.push(Element.name);
     });
   }, []);
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-  const addToFav = (id) => {
-    // const fav =
-    console.log("click" + id);
-    setCurrentUser(id);
-    console.log(currentUser);
-  };
+  const likeUrl = `${API.BACKEND_BASE_URL}/like-song`;
   const [liked, setLiked] = useState(false);
+  // const { currentUser, setCurrentUser } = useContext(UserContext);
+  const trackId = trackData?.id;
+  console.log(trackId);
+  const setToLike = () => {
+    if (liked) {
+      setLiked(false);
+    } else {
+      setLiked(true);
+      axios.post(likeUrl, { song_id: trackId });
+    }
+    console.log("click");
+    // console.log(currentUser);
+  };
+
   // console.log(typeof artists);
   return (
     <div className="albumInfo-card">
       <div className="albumName-container">
         <div className="inline-block whitespace-no-wrap">
-          <p>{album.name + artists.join()}</p>
+          <p>{trackData.name + artists.join()}</p>
         </div>
       </div>
       <div className="album-info">
-        {album?.name} is a {album?.album?.album_type} album by{" "}
-        {album.album.artists[0].name}
+        {trackData?.name} is a {trackData?.album?.album_type} album by{" "}
+        {trackData.album.artists[0].name}
       </div>
       <div className="album-release flex justify-between">
-        <p>Release Date: {album?.album?.release_date}</p>
-        <button onClick={() => setLiked(!liked)}>
+        <p>Release Date: {trackData?.album?.release_date}</p>
+        <button onClick={() => setToLike()}>
           {!liked ? (
             <AiOutlineHeart className="w-10 h-10 " />
           ) : (

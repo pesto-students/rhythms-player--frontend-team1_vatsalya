@@ -4,9 +4,12 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { BsFillPlayCircleFill } from "react-icons/bs";
 import { CurrentSongContext } from "../../context/currentSong.context";
+import { CurrentIndex } from "../../context/songIndex.context";
 
 function Search({ searchData }) {
   const { currentSong, setCurrentSong } = useContext(CurrentSongContext);
+  const { currentIndex, setCurrentIndex } = useContext(CurrentIndex);
+
   const [result, setResult] = useState([]);
   useEffect(() => {
     // console.log(searchData);
@@ -21,7 +24,8 @@ function Search({ searchData }) {
   }, [searchData]);
   const playTrack = (item, index) => {
     console.log(item);
-    setCurrentSong([item]);
+    setCurrentSong([...currentSong, item]);
+    setCurrentIndex(currentSong.length);
     // console.log(result.items[index]);
   };
   return (
