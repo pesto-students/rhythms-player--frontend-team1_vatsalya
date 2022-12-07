@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { UserProvider } from "./context/user.component";
-// import { Auth0Provider } from "@auth0/auth0-react";
 import { TokenProvider } from "./context/spotify.token";
 import { CurrentSongProvider } from "./context/currentSong.context";
 import { CurrentIndexProvider } from "./context/songIndex.context";
