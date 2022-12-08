@@ -1,11 +1,11 @@
 import React from "react";
 import AlbumImage from "./AlbumImage";
 import AlbumInfo from "./AlbumInfo";
-function SongCard({ album }) {
+function SongCard({ trackData }) {
   return (
     <div className="songCard-body flex">
-      <AlbumImage url={album?.images[0]?.url} />
-      {/* <AlbumInfo album={album} /> */}
+      <AlbumImage url={trackData?.album?.images[0]?.url} />
+      <AlbumInfo trackData={trackData} />
     </div>
   );
 }

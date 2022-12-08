@@ -1,24 +1,47 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-const musixMatchApiKey = `&apikey=17dec0e1673916834f5044a23b8107d4`;
+const musixMatchApiKey = `17dec0e1673916834f5044a23b8107d4`;
 const format_url = `?format=json&callback=callback`;
 function Lyrics({ trackData }) {
-  const [lyrics, setLyrics] = useState("Lyrics not found");
   console.log(trackData);
-  const artistName = trackData.album?.artist?.[0].name;
-  const trackName = trackData.album?.name;
+  const [lyrics, setLyrics] = useState("");
+
+  const artistName = trackData?.artists?.[0].name;
+  const trackName = trackData?.name;
   useEffect(() => {
-    axios
-      .get(
-        `https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/matcher.lyrics.get?q_track=${trackName}&q_artist=${artistName}apikey=${musixMatchApiKey}`
-      )
-      .then((res) => {
-        let lyrics = res.data.message.body.lyrics;
-        setLyrics({ lyrics });
+    console.log(artistName);
+    console.log(trackName);
+
+    var config = {
+      method: "get",
+      url: "http://localhost:3001/lyrics",
+      headers: {
+        "Content-Type": "text/plain",
+      },
+      data: {
+        name: trackName,
+        artistName: artistName,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data.message.body);
+        const lyricsData = response.data.message?.body?.lyrics?.lyrics_body;
+
+        setLyrics(lyricsData);
       })
-      .catch((err) => console.log(err));
-  }, []);
-  return <div>{lyrics}</div>;
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [lyrics]);
+  return (
+    <div className=" w-3/5 h-fit place-content-center mx-20">
+      <div className="mx-10 w-2/5 h-3/5  p-10  font-bold text-2xl text-white">
+        {lyrics}
+      </div>
+    </div>
+  );
 }
 
 export default Lyrics;

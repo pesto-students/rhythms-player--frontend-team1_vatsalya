@@ -1,7 +1,7 @@
-import React from "react";
+// import React from "react";
 
-function Explore() {
-  return <div className=" bg-red-200">Explore</div>;
-}
+// function Explore() {
+//   return <div className=" w-96 h-full bg-red-200">Explore</div>;
+// }
 
-export default Explore;
+// export default Explore;

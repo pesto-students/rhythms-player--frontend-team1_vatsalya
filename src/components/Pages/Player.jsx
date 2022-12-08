@@ -11,15 +11,17 @@ function Player() {
   const { Token } = useContext(TokenContext); // token that was generated as the  app start
   const { currentSong, setCurrentSong } = useContext(CurrentSongContext); // for selecting song from the list of tracks
   const [trackData, setTrackData] = useState([]);
-  const [currentTrack, setCurrentTrack] = useState({});
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const token = Token;
-    console.log(location.state);
+
+    // debugger;
+    console.log(location.state.data);
+
     if (location.state) {
-      const track_id = location.state.id;
-      async function getTrackData() {
+      async function getTracksData() {
+        const track_id = location.state.data.id;
+
         const response = await axios.get("https://api.spotify.com/v1/tracks", {
           params: {
             ids: track_id,
@@ -30,21 +32,21 @@ function Player() {
             Authorization: "Bearer " + token,
           },
         });
-        console.log(response.data);
-        setTrackData(response.data?.tracks);
-        setCurrentTrack(response.data?.tracks?.[0]);
+        console.log(response.data?.tracks, response.data.tracks);
+        setTrackData(response.data.tracks);
       }
-      getTrackData();
+      getTracksData();
     }
-  }, [location.state]);
+  }, []);
+  console.log("player out of effect", trackData);
   return (
     <div className="flex w-screen h-screen">
       <div className="right-player-body">
-        <SongCard album={currentTrack.album} />
-        <Queue trackData={trackData} setCurrentIndex={setCurrentIndex} />
+        <SongCard trackData={location.state.data} />
+        <Queue trackData={trackData} />
       </div>
       <div className="left-player-body">
-        {/* <Lyrics trackData={trackData} /> */}
+        <Lyrics trackData={location.state.data} />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 // these are the actual value
 export const CurrentSongContext = createContext({
-  currentSong: null,
+  currentSong: [],
   setCurrentSong: () => null,
 });
 
