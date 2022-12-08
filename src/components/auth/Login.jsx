@@ -3,7 +3,7 @@ import "../../assets/css/auth.css";
 import swal from "sweetalert";
 import axios from "axios";
 import { API } from "../../config/APIConfig";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const LOGINAPI = `${API.URL}/api/${API.VERSION}/login`;
 
 const Login = () => {
@@ -103,6 +103,23 @@ const Login = () => {
                   required=""
                   onChange={handleInpChange}
                 />
+              </div>
+
+              <div className="flex items-start">
+                <div className="ml-3 text-sm">
+                  <label
+                    htmlFor="terms"
+                    className="font-light text-gray-500 dark:text-gray-300"
+                  >
+                    Haven't registered yet?{" "}
+                    <Link
+                      className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                      to="/register"
+                    >
+                      Register here
+                    </Link>
+                  </label>
+                </div>
               </div>
 
               <button
