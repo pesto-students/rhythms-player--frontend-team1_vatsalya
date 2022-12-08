@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { CurrentSongContext } from ".././context/currentSong.context";
 // import { TokenContext } from ".././context/spotify.token";
-// import { UserContext } from "../context/user.component";
+import { UserContext } from "../context/user.component";
 import { CurrentIndex } from "../context/songIndex.context";
 import ProgressBar from "./commonComponents/ProgressBar";
 import { useNavigate } from "react-router-dom";
+import PlaylistDropUP from "./commonComponents/PlaylistDropUP";
+
 import {
   AiFillPlayCircle,
   AiFillPauseCircle,
@@ -15,13 +17,10 @@ import {
   AiOutlineFullscreen,
   AiOutlineFullscreenExit,
 } from "react-icons/ai";
-import {
-  MdShuffle,
-  MdPlaylistAdd,
-  MdOutlineVolumeOff,
-  MdOutlineVolumeUp,
-} from "react-icons/md";
+import { MdPlaylistAdd } from "react-icons/md";
 function AudioPlayer() {
+  const { addPlaylistToPlayListArray, userPlaylist, getUserPlaylist } =
+    useContext(UserContext);
   const { currentIndex, setCurrentIndex } = useContext(CurrentIndex);
   // currenSong is a list of objects
   const { currentSong, setCurrentSong } = useContext(CurrentSongContext);
@@ -34,6 +33,8 @@ function AudioPlayer() {
   const intervalRef = useRef();
   const isReady = useRef(false);
   const { duration } = audioRef.current;
+  const [open, setOpen] = useState(false);
+  const [playListName, setPlaylistName] = useState("");
   const handleNext = () => {
     if (currentIndex < total.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -112,7 +113,14 @@ function AudioPlayer() {
 
     // setFullscreen(!fullScreen);
   };
-  const showPlaylist = () => {};
+  const showPlaylist = () => {
+    setOpen(!open);
+    // getUserPlaylist();
+  };
+  const createPlaylist = () => {
+    console.log(playListName);
+    // addPlaylistToPlayListArray(playListName);
+  };
 
   return (
     <div className=" w-screen h-40 absolute bottom-0 flex">
@@ -129,10 +137,6 @@ function AudioPlayer() {
         <div className="h-full w-full  flex">
           <div className=" h-40 w-3/4  relative">
             <div className="flex items-center justify-center h-full w-full  text-6xl absolute bottom-5 ">
-              <AiFillBackward
-                className="hover:text-white"
-                // onClick={skipBackward}
-              />
               <AiFillFastBackward
                 className="hover:text-white "
                 onClick={handlePrev}
@@ -150,27 +154,16 @@ function AudioPlayer() {
                 className="active:ring-10 ring-primary/30   hover:text-white "
                 onClick={handleNext}
               />
-              <AiFillForward className="hover:text-white" />
-              <div
-                className="flex text-5xl justify-between "
-                // onClick={skipForward}
-              ></div>
             </div>
           </div>
-          <div className=" h-32 w-1/4 flex items-center justify-around text-4xl ">
-            <MdShuffle className="hover:text-white" />
+
+          <div className=" h-32 w-1/4 flex items-center justify-around text-4xl  ">
             <MdPlaylistAdd
-              className="hover:text-white"
+              className="hover:text-white relative"
               onClick={() => showPlaylist()}
             />
-            <MdOutlineVolumeOff
-              className="hover:text-white"
-              //   onClick={muteAudio}
-            />
-            <MdOutlineVolumeUp
-              className="hover:text-white"
-              //   onClick={unmuteAudio}
-            />
+            {open ? <PlaylistDropUP /> : ""}
+
             <div
               onClick={() => {
                 Expand_handler(currentSong[currentIndex]);

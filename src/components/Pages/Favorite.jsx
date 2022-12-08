@@ -7,10 +7,14 @@ import { UserContext } from "../../context/user.component";
 function Favorite() {
   const { Token } = useContext(TokenContext); // taking token from the token context
   const [userLikedTracks, setUserLikedTracks] = useState([]); // backend data ! a list of all the song_id that the user have liked
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser, userLiked, setsUserLiked } =
+    useContext(UserContext);
   const [likedTrackDataFromSpotify, setLikedTrackDataFromSpotify] = useState(
     []
   );
+  const addToLiked = (id) => {
+    return setsUserLiked([...userLiked, id]);
+  };
   const fetchTracks = (Ids) => {
     const IdsString = Ids.join();
     axios
@@ -31,14 +35,16 @@ function Favorite() {
       });
   };
   useEffect(() => {
-    console.log("use effect was called ");
+    // console.log("use effect was called ");
 
     const favUrl = `${API.BACKEND_BASE_URL}/liked-songs`;
 
     axios.get(favUrl).then((res) => {
+      res.data.map((item) => {
+        addToLiked(item.song_id);
+      });
       const Ids = res.data.map((item) => item.song_id);
       fetchTracks(Ids);
-      console.log("use effect was called and have  :" + Ids.join());
     });
   }, []);
   // if (!likedTrackDataFromSpotify) return <div>No data found...</div>;

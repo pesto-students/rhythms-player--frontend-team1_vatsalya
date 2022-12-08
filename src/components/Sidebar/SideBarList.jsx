@@ -2,7 +2,6 @@ import {
   MdExplore,
   MdOutlinePlaylistAddCheck,
   MdOutlineBookmark,
-  MdLoop,
   MdHistory,
 } from "react-icons/md";
 
@@ -18,18 +17,14 @@ const SidebarList = [
     icon: <MdOutlineBookmark />,
     name: "Favorite",
   },
+
   {
     id: 3,
-    icon: <MdLoop />,
-    name: "Repeated",
-  },
-  {
-    id: 4,
     icon: <MdOutlinePlaylistAddCheck />,
     name: "Playlist",
   },
   {
-    id: 5,
+    id: 4,
     icon: <MdHistory />,
     name: "History",
   },

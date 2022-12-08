@@ -9,7 +9,7 @@ import { SideBar } from "../components/Sidebar/SideBar";
 // import { Header } from "./components/Header";
 import Favorite from "../components/Pages/Favorite";
 import History from "../components/Pages/History";
-import Repeated from "../components/Pages/Repeated";
+
 import Playlist from "../components/Pages/Playlist";
 // import { Routes, Route, Outlet } from "react-router-dom";
 import Search from "../components/Pages/Search";
@@ -42,7 +42,7 @@ const RouteConfig = () => {
             <Route path="/home" element={<Rhythms />} />
             <Route path="/Favorite" element={<Favorite />} />
             <Route path="/History" element={<History />} />
-            <Route path="/Repeated" element={<Repeated />} />
+
             <Route path="/Playlist" element={<Playlist />} />
             <Route path="/Search" element={<Search searchData={Data} />} />
             <Route path="/Player" element={<Player />} />

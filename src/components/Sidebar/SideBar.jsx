@@ -12,13 +12,11 @@ function SideBar() {
       case 2:
         Navigate("/Favorite");
         break;
+
       case 3:
-        Navigate("/Repeated");
-        break;
-      case 4:
         Navigate("/Playlist");
         break;
-      case 5:
+      case 4:
         Navigate("/History");
         break;
       default:

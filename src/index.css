@@ -302,6 +302,19 @@
     color: #f1f1f1;
     border-color: white;
   }
+  .dropUp {
+    position: absolute;
+    bottom: 170px;
+    right: 20rem;
+    width: 180px;
+    padding: 15px;
+    /* background-color: rgb(233, 235, 238); */
+    /* border: 1px solid rgb(0, 0, 0); */
+    background-color: rgba(39, 53, 77, 1);
+
+    z-index: 10;
+    border-radius: 20px;
+  }
 }
 body {
   margin: 0;
