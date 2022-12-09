@@ -46,7 +46,7 @@ function Queue({ trackData }) {
     <div className="queue-container flex">
       <div className="queue">
         <p className="font-bold text-xl mx-0 my-2 text-left text-white">
-          More From :
+          More From : {trackData?.artists?.[0].name}
         </p>
 
         <div className="queue-list">

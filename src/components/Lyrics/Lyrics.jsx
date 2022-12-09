@@ -26,7 +26,7 @@ function Lyrics({ trackData }) {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data.message.body);
+        console.log(response.data);
         const lyricsData = response.data.message?.body?.lyrics?.lyrics_body;
 
         setLyrics(lyricsData);
@@ -34,7 +34,7 @@ function Lyrics({ trackData }) {
       .catch(function (error) {
         console.log(error);
       });
-  }, [lyrics]);
+  }, []);
   return (
     <div className=" w-3/5 h-fit place-content-center mx-20">
       <div className="mx-10 w-2/5 h-3/5  p-10  font-bold text-2xl text-white">

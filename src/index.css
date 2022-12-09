@@ -304,9 +304,10 @@
   }
   .dropUp {
     position: absolute;
-    bottom: 170px;
-    right: 20rem;
-    width: 180px;
+    opacity: 0.3;
+    bottom: 90px;
+    right: 15rem;
+    width: fit-content;
     padding: 15px;
     /* background-color: rgb(233, 235, 238); */
     /* border: 1px solid rgb(0, 0, 0); */
@@ -314,6 +315,9 @@
 
     z-index: 10;
     border-radius: 20px;
+  }
+  .dropUp:hover {
+    opacity: 1;
   }
 }
 body {

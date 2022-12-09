@@ -35,14 +35,15 @@ function Playlist() {
       });
   };
 
-  const fetchPlaylistDataFromBackEnd = (playlist_id) => {
+  const fetchSongFromBackend = (playlist_id) => {
+    console.log(playlist_id);
     var data = JSON.stringify({
-      playlist_id: playlist_id,
+      playlist_id: "23",
     });
 
     var config = {
       method: "get",
-      url: `${API.BACKEND_BASE_URL}/playlists/playlistId/songs`,
+      url: "http://localhost:3001/api/v1/playlists/playlistId/songs",
       headers: {
         "Content-Type": "application/json",
       },
@@ -52,35 +53,36 @@ function Playlist() {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        setSongs(response.data);
       })
       .catch(function (error) {
-        console.log(error.message);
+        console.log(error);
       });
   };
 
-  useEffect(() => {
-    // getPlaylist();
-    userPlaylist.map((item) => {
-      console.log(item.id);
-      return fetchPlaylistDataFromBackEnd(item.id);
-    });
-  }, []);
+  // useEffect(() => {
+  //   // getPlaylist();
+  //   userPlaylist.map((item) => {
+  //     console.log(item.id);
+  //     return fetchPlaylistDataFromBackEnd(item.id);
+  //   });
+  // }, []);
 
   // if (!likedTrackDataFromSpotify) return <div>No data found...</div>;
   return userPlaylist.length ? (
-    <div className=" w-screen h-screen m-10 p-5 flex flex-wrap ">
-      {userPlaylist.map((item) => {
-        return (
-          <div
-            className=" w-1/5 h-1/5 rounded-md bg-slate-400 border-l-4 text-center font-extrabold  m-10 "
-            key={item.id}
-            onClick={() => console.log(item.id)}
-          >
-            {item.name}
-          </div>
-        );
-      })}
+    <div className=" w-screen h-screen   flex flex-wrap ">
+      <div className=" flex w-screen h-40 bg-secondary ">
+        {userPlaylist.map((item) => {
+          return (
+            <div
+              className=" w-40 h-10 rounded-md bg-slate-400 border-l-4 text-center font-extrabold  m-10 border-transparent border-4 hover:border-white"
+              key={item.id}
+              onClick={() => fetchSongFromBackend(item.id)}
+            >
+              {item.name}
+            </div>
+          );
+        })}
+      </div>
     </div>
   ) : (
     "You don't have a playlist yet"

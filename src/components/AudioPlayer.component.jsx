@@ -123,7 +123,7 @@ function AudioPlayer() {
   };
 
   return (
-    <div className=" w-screen h-40 absolute bottom-0 flex">
+    <div className=" w-screen h-40 absolute bottom-0 flex ">
       <div className="h-full w-60 ">
         <img
           className="card-image h-full"
