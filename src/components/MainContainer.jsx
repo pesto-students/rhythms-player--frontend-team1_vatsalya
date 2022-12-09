@@ -124,7 +124,7 @@ function MainContainer() {
         },
       });
       const res = response.data;
-      // console.log(res);
+      console.log(res);
       setAlbumList(response.data?.albums?.items);
     }
     fetchData();
@@ -145,8 +145,8 @@ function MainContainer() {
   return (
     <div className=" w-screen h-screen relative overflow-y-scroll">
       <div
-        className="w-screen h-fit     
-          flex items-center pt-5  my-10 bg-[rgb(64,63,63)] overflow-auto"
+        className="w-screen h-fit grid      grid-flow-col
+        grid-col-1  grid-gap-1   items-center pt-5  my-10 bg-[rgb(64,63,63)] overflow-auto"
       >
         {tracks?.map((track) => {
           return (
@@ -171,7 +171,8 @@ function MainContainer() {
 
       <div
         className="w-screen h-44     
-          flex items-center pt-5 px-2 my-10 bg-[rgb(64,63,63)] overflow-auto "
+        grid      grid-flow-col
+        grid-col-1 grid-gap-2 items-center pt-5 px-2 my-10 bg-[rgb(64,63,63)] overflow-x-scroll"
       >
         {artistList?.map((artist) => {
           return (
@@ -190,7 +191,8 @@ function MainContainer() {
       </div>
       <div
         className="w-screen h-fit     
-          flex items-center pt-5  my-10 bg-[rgb(64,63,63)] overflow-auto"
+        grid      grid-flow-col
+        grid-col-1  grid-gap-1  items-center pt-5  my-10 bg-[rgb(64,63,63)] overflow-auto"
       >
         {albumList?.map((album) => {
           return (

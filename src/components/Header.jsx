@@ -22,7 +22,7 @@ function Header({ searchResult }) {
           q: debouncedSearch,
           type: "track,artist",
           market: "IN",
-          limit: "10",
+          limit: "20",
           offset: "0",
         },
         headers: {

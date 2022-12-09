@@ -28,7 +28,7 @@ function Search({ searchData }) {
     // console.log(result.items[index]);
   };
   return (
-    <div className=" w-screen h-screen flex flex-wrap ">
+    <div className=" w-[90vw] h-[90vh] grid grid-col-6 grid-flow-col grid-rows-3 gap-2 overflow-y-scroll">
       {result?.items?.map((item, index) => {
         return (
           <div className="card mt-2" key={item.id}>

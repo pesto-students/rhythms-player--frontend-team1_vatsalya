@@ -19,7 +19,6 @@ import {
 } from "react-icons/ai";
 import { MdPlaylistAdd } from "react-icons/md";
 function AudioPlayer() {
-  
   const { addPlaylistToPlayListArray, userPlaylist, getUserPlaylist } =
     useContext(UserContext);
   const { currentIndex, setCurrentIndex } = useContext(CurrentIndex);
@@ -107,10 +106,13 @@ function AudioPlayer() {
 
   const Expand_handler = (currentSongDetails) => {
     console.log(currentSongDetails);
-    // setFullscreen(!fullScreen);
-    // navigate to player page
-
-    Navigate("/Player", { state: { data: currentSongDetails } });
+    if (!fullScreen) {
+      Navigate("/Player", { state: { data: currentSongDetails } });
+      setFullscreen(true);
+    } else {
+      Navigate("/home");
+      setFullscreen(false);
+    }
 
     // setFullscreen(!fullScreen);
   };
@@ -124,8 +126,8 @@ function AudioPlayer() {
   };
 
   return (
-    <div className=" w-screen h-40 absolute bottom-0 flex">
-      <div className="h-full w-60 ">
+    <div className=" w-screen h-16 transition ease-in-out delay-150 hover:h-40 absolute bottom-0 flex">
+      <div className=" hover:h-full hover:w-60 ">
         <img
           className="card-image h-full"
           src={total[currentIndex]?.album?.images?.[0].url}
@@ -135,7 +137,7 @@ function AudioPlayer() {
         <div className="w-full h-10">
           <ProgressBar percentage={trackProgress} audioRef={audioRef.current} />
         </div>
-        <div className="h-full w-full  flex">
+        <div className=" flex hover:h-full hover:w-full hover:visible ">
           <div className=" h-40 w-3/4  relative">
             <div className="flex items-center justify-center h-full w-full  text-6xl absolute bottom-5 ">
               <AiFillFastBackward
