@@ -20,7 +20,7 @@ const Login = () => {
   };
 
   const handleSubmit = (e) => {
-    debugger;
+    
     e.preventDefault();
     const headers = {
       "Content-Type": "application/json;charset=utf-8",
@@ -33,8 +33,15 @@ const Login = () => {
       .then((response) => {
         console.log(response, "userLogin");
         if (response?.status === 200) {
-          if (response?.data?.length != 0) navigate("/home", { replace: true });
-          else {
+          if (response?.data?.length != 0) {
+            const userInfo = response?.data[0];
+            window.localStorage.setItem("userId",userInfo.user_id);
+            window.localStorage.setItem("firstName",userInfo.first_name);
+            window.localStorage.setItem("lastName",userInfo.last_name);
+            window.localStorage.setItem("userName",userInfo.user_name);
+            window.localStorage.setItem("emailAddress",userInfo.email_address);
+            navigate("/home", { replace: true });
+          } else {
             swal("Login Failed", "Please Try Again", "error", {
               closeOnClickOutside: false,
               closeOnEsc: false,
@@ -111,12 +118,12 @@ const Login = () => {
                     htmlFor="terms"
                     className="font-light text-gray-500 dark:text-gray-300"
                   >
-                    Haven't registered yet?{" "}
+                    Not registered?{" "}
                     <Link
                       className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                       to="/register"
                     >
-                      Register here
+                      Create Account
                     </Link>
                   </label>
                 </div>

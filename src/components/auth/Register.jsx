@@ -20,7 +20,7 @@ const Register = () => {
   };
 
   const handleSubmit = (e) => {
-    debugger;
+    
     e.preventDefault();
     const headers = {
       "Content-Type": "application/json;charset=utf-8",

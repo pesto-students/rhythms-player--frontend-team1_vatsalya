@@ -21,6 +21,7 @@ import Player from "../components/Pages/Player";
 import AudioPlayer from "../components/AudioPlayer.component";
 // import AudioPlayer from "./components/AudioPlayer.component";
 import GetToken from "../Spotify/Spotify.token";
+import PlaylistSongs from "../components/commonComponents/PlaylistSongs";
 
 const RouteConfig = () => {
   const [Data, setData] = useState("");
@@ -42,10 +43,11 @@ const RouteConfig = () => {
             <Route path="/home" element={<Rhythms />} />
             <Route path="/Favorite" element={<Favorite />} />
             <Route path="/History" element={<History />} />
-
             <Route path="/Playlist" element={<Playlist />} />
+            <Route path="/PlaylistSongs" element={<PlaylistSongs />} />
             <Route path="/Search" element={<Search searchData={Data} />} />
             <Route path="/Player" element={<Player />} />
+
           </Routes>
         </div>
       </div>
