@@ -20,7 +20,7 @@ const Register = () => {
   };
 
   const handleSubmit = (e) => {
-    debugger;
+    
     e.preventDefault();
     const headers = {
       "Content-Type": "application/json;charset=utf-8",
@@ -156,7 +156,7 @@ const Register = () => {
                   onChange={handleInpChange}
                 />
               </div>
-              <div className="flex items-start">
+              {/* <div className="flex items-start">
                 <div className="flex items-center h-5">
                   <input
                     id="terms"
@@ -180,7 +180,7 @@ const Register = () => {
                     </a>
                   </label>
                 </div>
-              </div>
+              </div> */}
               <button
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"

@@ -12,7 +12,6 @@ function Search({ searchData }) {
 
   const [result, setResult] = useState([]);
   useEffect(() => {
-    // console.log(searchData);
     const data = searchData;
     const parsed = JSON.parse(data);
     setResult(parsed.tracks);

@@ -1,7 +1,8 @@
 import { createContext, useState } from "react";
 import axios from "axios";
 import { API } from "../config/APIConfig";
-
+import swal from "sweetalert";
+const CREATEPLAYLISTAPI = `${API.BACKEND_BASE_URL}/playlist/create`;
 export const UserContext = createContext({
   currentUser: [], // user id
   setCurrentUser: () => null, // sets the current user id once he logs in first fetch the user is from master table
@@ -11,39 +12,67 @@ export const UserContext = createContext({
   setsUserLiked: () => null, // this gets the data of songs user like
   addPlaylistToPlayListArray: () => null,
   getUserPlaylist: () => null,
+  createPlaylist: () => null
 });
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [userPlaylist, setPlaylist] = useState([]);
+  const currentUserId = window.localStorage.getItem("userId");
+
   const addPlaylistToPlayListArray = (PlaylistName) => {
     createPlaylist(PlaylistName);
-  }; // ?
+  }; 
   const [userLiked, setsUserLiked] = useState([]);
   const getUserPlaylist = () => {
-    var data = JSON.stringify({
-      userId: "3",
-    });
-
     var config = {
       method: "get",
-      url: `${API.BACKEND_BASE_URL}/playlists`,
+      url: `${API.BACKEND_BASE_URL}/playlist/list?userId=${currentUserId}`,
       headers: {
         "Content-Type": "application/json",
-      },
-      data: data,
+      }
     };
-
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        userPlaylist(response.data);
+        console.log(JSON.stringify(response?.data));
+        setPlaylist(response?.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
-
+  const createPlaylist = (playlistName) => {
+    var data = {
+      userId: currentUserId,
+      playlistName
+    };
+    
+    const headers = {
+      "Content-Type": "application/json;charset=utf-8",
+      "Access-Control-Allow-Origin": "*",
+    };
+    axios
+      .post(CREATEPLAYLISTAPI, data, {
+        headers: headers,
+      })
+      .then((response) => {
+        if (response?.status === 200) {
+          swal("Playlist was successfully created!", "", "success", {
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+          });
+        }
+        getUserPlaylist();
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+        swal("Playlist Creation Failed", "Please Try Again", "error", {
+          closeOnClickOutside: false,
+          closeOnEsc: false,
+        });
+      });
+  };
+  
   const value = {
     currentUser,
     setCurrentUser,
@@ -53,29 +82,7 @@ export const UserProvider = ({ children }) => {
     userLiked,
     setsUserLiked,
     addPlaylistToPlayListArray,
-  };
-
-  const createPlaylist = (playlistName) => {
-    var data = JSON.stringify({
-      name: playlistName,
-    });
-
-    var config = {
-      method: "post",
-      url: `${API.BACKEND_BASE_URL}/playlists`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    createPlaylist
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

@@ -62,7 +62,6 @@ function MainContainer() {
         },
       });
       const res = response.data?.tracks?.items;
-      console.log(res);
       if (currentSong.length == 0) {
         setCurrentSong(res);
       }

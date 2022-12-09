@@ -15,7 +15,7 @@ function Player() {
   useEffect(() => {
     const token = Token;
 
-    // debugger;
+    // 
     console.log(location.state.data);
 
     if (location.state) {

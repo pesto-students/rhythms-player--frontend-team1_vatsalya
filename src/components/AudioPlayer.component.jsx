@@ -19,6 +19,7 @@ import {
 } from "react-icons/ai";
 import { MdPlaylistAdd } from "react-icons/md";
 function AudioPlayer() {
+  
   const { addPlaylistToPlayListArray, userPlaylist, getUserPlaylist } =
     useContext(UserContext);
   const { currentIndex, setCurrentIndex } = useContext(CurrentIndex);
