@@ -1,75 +1,59 @@
-#Rhythms
-##Rhythms - Experience Music like never before 🎵
+# <img src="./src/assets/logo.svg" width="25px" height="20px"> Rhythms
+## Rhythms - Experience Music like never before 🎵
+ 
 
-Rhythms 🎵 is a feature rich music platform with responsive UI that works on all modern web browsers across all devices. The main goal of this platform is to provide great music browsing and listening experience to the users. Rhythms believe in the importance of providing insights to various stats to users on listening trends, top charts, favorite artists, & genres that would help them in gaining great visibility to globally recognized, loved and appreciated music.
+<img src="./src/assets/logo.svg" width="100px" height="100px">
 
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+** Rhythms ** 🎵 is a feature rich music platform with responsive UI that works on all modern web browsers across all devices. The main goal of this platform is to provide great music browsing and listening experience to the users. Rhythms believe in the importance of providing insights to various stats to users on listening trends, top charts, favorite artists, & genres that would help them in gaining great visibility to globally recognized, loved and appreciated music.
 
-## Available Scripts
+# Table Of Content
+ <ol>
+  <li>Demo</li>
+  <li>Installation</li>
+  <li>Technology Stack</li>
+  <li>Authors</li>
+  <li>License</li>
+</ol>
+<br>
 
-In the project directory, you can run:
+## Demo
 
-### `npm start`
+<br>
+Please Note:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1.  We recommend using this app in Google Chrome.
+2.  We recommend using this app on laptop/desktop for the best possible experience as of now.
+<br>
+Link:- <br>
+Test Credentials:-<br>
+<ul><li>Email:pestoproject@demo.com</li><li>Password:123456</li>
+ </ul>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#  Installation   
+<br>
+-   Fork or directly clone this repository to your local machine using the `git clone` command <br>
+-   Use the `npm install` command to install dependencies<br>
+-   Once the dependencies are finished installing, run `npm start` command to start the app in the development mode.<br>
+-   Open [http://localhost:3000](http://localhost:3000/) to view it in your browser.<br>
 
-### `npm test`
+[](https://github.com/pesto-students/rhythms-player--frontend-team1_vatsalya)Rhythms <br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Technology Stack
+Our tech stack has been tested and proven. We were able to create a web app that was fast, performant, and easily extendable, making it fairly future-proof
 
-### `npm run build`
+- [ReactJS] - HTML enhanced for web apps!
+- [React Context API,] - For state management it the web app
+- [Tailwind CSS] - to make it quicker to write and maintain the styling of the application.
+- [Node.js] -for backend
+- [Express] - fast node.js application
+- [Amazon Web services] - for cloud services
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Authors
+<ul><li>Anuj Mishra</li><li>Aravind Sirivelli</li>
+  
+## License 
+  <br>
+  [MIT](https://opensource.org/licenses/MIT)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  
