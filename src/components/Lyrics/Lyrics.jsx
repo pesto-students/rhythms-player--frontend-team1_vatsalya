@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-const musixMatchApiKey = `17dec0e1673916834f5044a23b8107d4`;
-const format_url = `?format=json&callback=callback`;
+import { API } from "../../config/APIConfig";
 function Lyrics({ trackData }) {
   console.log(trackData);
   const [lyrics, setLyrics] = useState("");
@@ -14,7 +13,7 @@ function Lyrics({ trackData }) {
 
     var config = {
       method: "get",
-      url: "http://localhost:3001/lyrics",
+      url: `${API.BACKEND_BASE_URL}/lyrics`,
       headers: {
         "Content-Type": "text/plain",
       },
@@ -35,12 +34,14 @@ function Lyrics({ trackData }) {
         console.log(error);
       });
   }, [lyrics]);
-  return (
+  return lyrics.length ? (
     <div className=" w-3/5 h-fit place-content-center mx-20">
       <div className="mx-10 w-2/5 h-3/5  p-10  font-bold text-2xl text-white">
         {lyrics}
       </div>
     </div>
+  ) : (
+    "lyrics not found...."
   );
 }
 

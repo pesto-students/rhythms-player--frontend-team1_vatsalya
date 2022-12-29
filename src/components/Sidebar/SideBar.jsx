@@ -16,9 +16,6 @@ function SideBar() {
       case 3:
         Navigate("/Playlist");
         break;
-      case 4:
-        Navigate("/History");
-        break;
       default:
         Navigate("/");
     }

@@ -135,7 +135,7 @@ function PlaylistDropUP() {
     }
   };
   return (
-    <div className="dropUp w-fit h-fit text-sm p-2 ">
+    <div className="dropUp w-fit h-fit text-sm p-2 right-[5rm]">
       <ul className=" m-1">
         {list.map((item) => {
           return (

@@ -4,16 +4,10 @@ import Button_follow from "../commonComponents/Button_follow";
 import { TokenContext } from "../../context/spotify.token";
 import axios from "axios";
 import { useState } from "react";
-// import { LoadingManager } from "three";
 function Queue({ trackData }) {
-  console.log("Q track data", trackData);
-  // console.log(trackData?.album?.artists?.[0].id);
   const { Token } = useContext(TokenContext);
-  // const Artist_id = "6LEG9Ld1aLImEFEVHdWNSB";
   const [Queue, setQueue] = useState([]);
-  // console.log("using nav:" + location.state);
   useEffect(() => {
-    // console.log("using nav use effect:" + location.state);
     const token = Token;
     const Artist_id =
       trackData.length > 0 ? trackData[0].album.artists[0].id : undefined;

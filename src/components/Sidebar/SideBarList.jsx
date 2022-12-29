@@ -23,11 +23,6 @@ const SidebarList = [
     icon: <MdOutlinePlaylistAddCheck />,
     name: "Playlist",
   },
-  {
-    id: 4,
-    icon: <MdHistory />,
-    name: "History",
-  },
 ];
 
 export { SidebarList };

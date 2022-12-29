@@ -126,7 +126,7 @@ function AudioPlayer() {
   };
 
   return (
-    <div className=" w-screen h-16 transition ease-in-out delay-150 hover:h-40 absolute bottom-0 flex">
+    <div className=" w-screen h-40 absolute bottom-0 flex">
       <div className=" hover:h-full hover:w-60 ">
         <img
           className="card-image h-full"
