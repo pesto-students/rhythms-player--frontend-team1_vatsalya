@@ -54,6 +54,7 @@ Our tech stack has been tested and proven. We were able to create a web app that
   
 ## License 
   <br>
-  [MIT](https://opensource.org/licenses/MIT)
+ <a href ="https://opensource.org/licenses/MIT">MIT</a>
+
 
   
