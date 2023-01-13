@@ -7,7 +7,7 @@
 
 ** Rhythms ** 🎵 is a feature rich music platform with responsive UI that works on all modern web browsers across all devices. The main goal of this platform is to provide great music browsing and listening experience to the users. Rhythms believe in the importance of providing insights to various stats to users on listening trends, top charts, favorite artists, & genres that would help them in gaining great visibility to globally recognized, loved and appreciated music.
 
-# Table Of Content
+# Table Of Contents
  <ol>
   <li>Demo</li>
   <li>Installation</li>
