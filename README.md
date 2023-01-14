@@ -25,7 +25,7 @@ Please Note:
 1.  We recommend using this app in Google Chrome.
 2.  We recommend using this app on laptop/desktop for the best possible experience as of now.
 <br>
-Link:- <br>
+Link:-<a href="https://joyful-clafoutis-eba57e.netlify.app">Click Here</a> <br>
 Test Credentials:-<br>
 <ul><li>Email:pestoproject@demo.com</li><li>Password:123456</li>
  </ul>
